@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+  color: var(--tg-theme-text-color);
+}
+
+body {
+  background: var(--tg-theme-bg-color);
+}
+
+
+a {
+  transition: color .4s ease-out;
+}

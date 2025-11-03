@@ -3,11 +3,9 @@ import App from './App.vue'
 import ErrorApp from './ErrorApp.vue'
 import router from './router'
 import { init } from '@tma.js/sdk-vue'
-import eruda from 'eruda'
 import './assets/css/main.css'
 
 import './mock-data.ts'
-eruda.init()
 
 try {
   init()
