@@ -1,20 +1,44 @@
 <script setup lang="ts">
 import AppNav from '@/components/AppNav.vue'
 import AppLogo from '@/components/AppLogo.vue'
-import { ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 const isMenuOpened = ref<boolean>(false)
+const setMenu = (isOpen: boolean) => (isMenuOpened.value = isOpen)
+
+const handleClickMobileMenuBurger = () => setMenu(!isMenuOpened.value)
 
 const handleClickMobileMenu = (event: MouseEvent) => {
-  isMenuOpened.value = !isMenuOpened.value
+  if (!event.target) return
 
-  console.log('click', event)
-  const burger = event.target as HTMLElement
+  if (
+    document.getElementById('burger')?.contains(event.target as HTMLElement) ||
+    document.getElementById('mobile-menu')?.contains(event.target as HTMLElement) ||
+    !isMenuOpened.value
+  )
+    return
+
+  isMenuOpened.value = false
 }
+
+onMounted(() => {
+  const menuItems = document.querySelectorAll('#mobile-menu nav a')
+  window.addEventListener('click', handleClickMobileMenu)
+
+  menuItems.forEach((item) => item.addEventListener('click', () => setMenu(false)))
+})
+
+onUnmounted(() => {
+  const menuItems = document.querySelectorAll('#mobile-menu nav a')
+
+  window.removeEventListener('click', handleClickMobileMenu)
+
+  menuItems.forEach((item) => item.removeEventListener('click', () => setMenu(false)))
+})
 </script>
 
 <template>
-  <div id="burger" :class="{ active: isMenuOpened }" @click="handleClickMobileMenu">
+  <div id="burger" :class="{ active: isMenuOpened }" @click="handleClickMobileMenuBurger">
     <span></span>
     <span></span>
     <span></span>

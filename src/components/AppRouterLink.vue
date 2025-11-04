@@ -1,22 +1,35 @@
 <script setup lang="ts">
+import { useRoute } from 'vue-router'
+
 interface AppRouterLinkProps {
-  title: string
+  title?: string | Symbol
   to: string
   target?: string
   class?: string
+  activeClass?: string
 }
 
-const props = defineProps<AppRouterLinkProps>()
+const props = withDefaults(defineProps<AppRouterLinkProps>(), {
+  activeClass: 'active',
+})
 </script>
 
 <template>
-  <RouterLink :to="props.to" :target="props.target" :class="props.class" class="link">
+  <RouterLink
+    v-if="props.title && props.to !== '/'"
+    :to="props.to"
+    :target="props.target"
+    class="link"
+    :class="props.class"
+    :active-class="props.activeClass"
+  >
     {{ props.title }}
   </RouterLink>
 </template>
 
 <style scoped>
-.link:hover {
+.link:hover,
+.link.active {
   color: var(--tg-theme-link-color);
 }
 </style>
