@@ -14,8 +14,12 @@ try {
   const pinia = createPinia()
   const app = createApp(App)
 
-  app.use(pinia)
   app.use(router)
+  app.use(pinia)
+  //
+  // router.befor`((to) => {
+  //
+  // })
 
   app.mount('#app')
 } catch (e) {

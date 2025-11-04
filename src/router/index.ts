@@ -3,12 +3,7 @@ import MainView from '@/views/MainView.vue'
 import AboutView from '@/views/AboutView.vue'
 import PrivacyView from '@/views/PrivacyView.vue'
 import RefundView from '@/views/RefundView.vue'
-import { useUserStore } from '@/stores/user.ts'
 import InfoView from '@/views/InfoView.vue'
-
-const userStore = useUserStore()
-
-const { isAdmin } = userStore
 
 const defaultRoutes: RouteRecordRaw[] = [
   { path: '/', component: MainView, name: 'Главная' },
@@ -21,7 +16,7 @@ const adminRoutes: RouteRecordRaw[] = [{ path: '/info', component: InfoView, nam
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: isAdmin ? [...defaultRoutes, ...adminRoutes] : defaultRoutes,
+  routes: defaultRoutes,
 })
 
 export default router
