@@ -25,7 +25,6 @@ export const useUserStore = defineStore('user', {
     async fetchUser() {
       try {
         const { data } = await $API.get<IUser>('/users/login')
-        console.log('Check login in user store, ', data)
         this.user = data
         return true
       } catch (error) {

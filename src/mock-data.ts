@@ -1,4 +1,3 @@
-// src/tg-mock.ts
 import { mockTelegramEnv, emitEvent } from '@tma.js/bridge'
 
 if (import.meta.env.DEV) {

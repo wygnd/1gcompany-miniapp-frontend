@@ -16,13 +16,9 @@ try {
 
   app.use(router)
   app.use(pinia)
-  //
-  // router.befor`((to) => {
-  //
-  // })
 
   app.mount('#app')
 } catch (e) {
-  console.error(e)
+  console.error('Error init app' ,e)
   createApp(ErrorApp).mount('#app')
 }
